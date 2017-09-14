@@ -125,4 +125,3 @@ class ExternalsVisitor extends NodeVisitorAbstract
         }
     }
 }
-

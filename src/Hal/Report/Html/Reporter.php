@@ -57,13 +57,13 @@ class Reporter
         }
 
         // copy sources
-        if(!file_exists($logDir . '/js')) {
+        if (!file_exists($logDir . '/js')) {
             mkdir($logDir.'/js', 0755, true);
         }
-        if(!file_exists($logDir . '/css')) {
+        if (!file_exists($logDir . '/css')) {
             mkdir($logDir.'/css', 0755, true);
         }
-        if(!file_exists($logDir . '/images')) {
+        if (!file_exists($logDir . '/images')) {
             mkdir($logDir.'/images', 0755, true);
         }
         recurse_copy(__DIR__ . '/template/js', $logDir . '/js');
@@ -90,7 +90,7 @@ class Reporter
             sprintf('%s/js/history-%d.json', $logDir, $next),
             json_encode($today, JSON_PRETTY_PRINT)
         );
-	file_put_contents(
+        file_put_contents(
             sprintf('%s/js/latest.json', $logDir, $next),
             json_encode($today, JSON_PRETTY_PRINT)
         );
@@ -102,7 +102,6 @@ class Reporter
         );
 
         $this->output->writeln(sprintf('HTML report generated in "%s" directory', $logDir));
-
     }
 
     /**
@@ -189,8 +188,13 @@ class Reporter
             }
         }
 
-        return sprintf('<span title="Last value: %s" class="progress progress-%s progress-%s">%s %s</span>', $oldValue,
-            $goodOrBad, $r, $diff,
-            $svg[$r]);
+        return sprintf(
+            '<span title="Last value: %s" class="progress progress-%s progress-%s">%s %s</span>',
+            $oldValue,
+            $goodOrBad,
+            $r,
+            $diff,
+            $svg[$r]
+        );
     }
 }

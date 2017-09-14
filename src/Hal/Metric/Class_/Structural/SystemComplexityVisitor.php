@@ -40,7 +40,6 @@ class SystemComplexityVisitor extends NodeVisitorAbstract
     public function leaveNode(Node $node)
     {
         if ($node instanceof Stmt\Class_) {
-
             $name = (string) (isset($node->namespacedName) ? $node->namespacedName : 'anonymous@'.spl_object_hash($node));
             $class = $this->metrics->get($name);
 
@@ -48,7 +47,6 @@ class SystemComplexityVisitor extends NodeVisitorAbstract
 
             foreach ($node->stmts as $stmt) {
                 if ($stmt instanceof Stmt\ClassMethod) {
-
                     // number of returns and calls
                     $output = 0;
                     $fanout = [];

@@ -121,7 +121,5 @@ EOT;
 
         $out .= "\n\n";
         $this->output->write($out);
-
     }
-
 }

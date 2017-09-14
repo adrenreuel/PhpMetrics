@@ -69,17 +69,18 @@ class Finder
     public function fetch(array $paths)
     {
         $files = array();
+
+        $regexForFilter = !empty($this->excludedDirs)
+            ? '((?!' . \preg_quote(\implode('|', $this->excludedDirs)) . ').)+'
+            : '.+';
+
         foreach ($paths as $path) {
             if (is_dir($path)) {
                 $path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
                 $directory = new RecursiveDirectoryIterator($path, $this->flags);
                 $iterator = new RecursiveIteratorIterator($directory);
 
-                $filterRegex = sprintf(
-                    '`^%s%s$`',
-                    !empty($this->excludedDirs) ? '((?!' . preg_quote(implode('|', $this->excludedDirs)) . ').)+' : '.+',
-                    '\.(' . implode('|', $this->extensions) . ')'
-                );
+                $filterRegex = sprintf('`^%s%s$`', $regexForFilter, '\.(' . implode('|', $this->extensions) . ')');
 
                 $filteredIterator = new RegexIterator(
                     $iterator,

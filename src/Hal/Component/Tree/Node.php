@@ -108,5 +108,4 @@ class Node
         $this->data = $data;
         return $this;
     }
-
 }
